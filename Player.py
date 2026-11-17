@@ -3,7 +3,6 @@ from pygame.math import Vector2
 
 move_keys = [pygame.K_w, pygame.K_s, pygame.K_a, pygame.K_d]
 
-
 class Player:
 
     def __init__(self):
@@ -31,33 +30,10 @@ class Player:
     def move(self):
         if self.velocity.length() > 0:
             self.velocity = self.velocity.normalize() * self.speed
-            player.x += self.velocity.x
-            player.y += self.velocity.y
+            self.x += self.velocity.x
+            self.y += self.velocity.y
 
     def player_loop(self, keys, screen):
         self.check_buttons(keys)
         self.move()
         self.draw_player(screen)
-
-
-pygame.init()
-screen = pygame.display.set_mode((800, 600))
-pygame.display.set_caption("Red Bob is killing again")
-clock = pygame.time.Clock()
-running = True
-player = Player()
-
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    screen.fill((30, 30, 30))
-    
-    keys = pygame.key.get_pressed()
-    player.player_loop(keys, screen)
-
-    pygame.display.flip()
-    clock.tick(60)
-
-pygame.quit()
